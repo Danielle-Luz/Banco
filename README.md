@@ -5,10 +5,10 @@
 ## Componentes
 
 - Maykell Alvim de França
--
--
--
--
+- Danielle da Luz
+- Milena Sousa
+- Mateus Anchieta
+- Karla Andressa
 
 
 ## Atividades
