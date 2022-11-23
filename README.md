@@ -15,7 +15,7 @@
 
 Aqui estão listadas as atividades e qual membro do grupo é responsável para efetuá-la:
 
--Pessoa pra criar estruturar o projeto. -->
+-Pessoa pra criar estruturar o projeto. --> Danielle
 
 
 -Gerar script BD --> Danielle
@@ -30,14 +30,17 @@ Aqui estão listadas as atividades e qual membro do grupo é responsável para e
 -Consulta de clientes --> Danielle
 
 
--Transferência -->
+-Transferência --> Mateus
 
 
 -Adicionar saldo -->  Carla
 
 
--Imprimir relatório -->
+-Imprimir relatório --> Maykell
+
+-Criar o factory --> Mateus
+
 
 -Criar o menu. --> Danielle
 
--Escrever a documentação --> Maykell Alvim
+-Escrever a documentação --> Maykell 
