@@ -1,0 +1,57 @@
+package br.com.mesttra.banco.pojo;
+
+public class ClientePojo {
+  private String numeroConta;
+  private int agencia;
+  private String telefone;
+  private double saldo;
+  private double limiteCheque;
+
+  public ClientePojo (String numeroConta, int agencia, String telefone, double saldo, double limiteCheque) {
+     this.agencia = agencia;
+     this.numeroConta = numeroConta;
+     this.telefone = telefone;
+     this.saldo = saldo;
+     this.limiteCheque = limiteCheque;
+  }
+
+  public String getNumeroConta() {
+      return numeroConta;
+  }
+
+  public int getAgencia() {
+      return agencia;
+  }
+
+  public String getTelefone() {
+      return telefone;
+  }
+
+  public double getSaldo() {
+      return saldo;
+  }
+
+  public double getLimiteCheque() {
+      return limiteCheque;
+  }
+
+  public void setSaldo (double saldo) {
+      this.saldo = saldo;
+  }
+
+  public void aumentarSaldo (double valor) {
+      this.saldo += valor;
+  }
+
+  public void diminuirSaldo (double valor) {
+      this.saldo -= valor;
+  }
+
+  public void aumentarCheque (double valor) {
+      this.limiteCheque += valor;
+  }
+
+  public void diminuirCheque (double valor) {
+      this.limiteCheque -= valor;
+  }
+}
