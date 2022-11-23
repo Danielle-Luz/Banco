@@ -18,25 +18,26 @@ Aqui estão listadas as atividades e qual membro do grupo é responsável para e
 -Pessoa pra criar estruturar o projeto. -->
 
 
--Gerar script BD -->
+-Gerar script BD --> Danielle
 
 
--Cadastro de clientes -->
+-Cadastro de clientes --> Mateus
 
 
--Remover clientes -->
+-Remover clientes --> Milena
 
 
--Consulta de clientes -->
+-Consulta de clientes --> Danielle
 
 
 -Transferência -->
 
 
--Adicionar saldo -->
+-Adicionar saldo -->  Carla
 
 
 -Imprimir relatório -->
 
+-Criar o menu. --> Danielle
 
 -Escrever a documentação --> Maykell Alvim
