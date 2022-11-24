@@ -34,4 +34,23 @@ public class PessoaFisicaDAO {
     return listaPessoas;
   }
 
+  public PessoaFisicaPojo consultarCliente (String numeroConta) {
+    PessoaFisicaPojo clienteEncontrado = null;
+
+    String comando = "SELECT * FROM pessoa_fisica WHERE numeroConta = ?";
+
+    try (PreparedStatement query = connection.prepareStatement(comando)) {
+      query.setString(1, numeroConta);
+
+      ResultSet registro = query.executeQuery();
+
+      ArrayList<PessoaFisicaPojo> listaPessoas = retornaClientes(registro);
+
+      clienteEncontrado = listaPessoas.get(0);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    return clienteEncontrado;
+  }
 }
