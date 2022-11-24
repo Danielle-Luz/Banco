@@ -8,6 +8,10 @@ import br.com.mesttra.banco.scanner.Scanner;
 
 public class Menu {
 
+  public Menu () {
+    super();
+  }
+
   private void limparTela() {
     System.out.print("\033[H\033[2J");
     System.out.flush();
@@ -141,14 +145,13 @@ public class Menu {
     }
   }
 
-  public void mostrarMenu() {
+  public void exibirMenu() {
     do {
-      int opcao = 
-        Scanner.lerValorInteiroComLimites(
-          1,
-          7,
-          "Bem vindo, gerente.\nEscolha uma opção:\n1- Cadastrar cliente\n2- Remover cliente\n3- Alterar valor do cheque especial\n4- Fazer transferência\n5- Adicionar saldo\n6- Imprimir relatório\n7- Consultar cliente\n"
-        );
+      int opcao = Scanner.lerValorInteiroComLimites(
+        1,
+        7,
+        "Bem vindo, gerente.\nEscolha uma opção:\n1- Cadastrar cliente\n2- Remover cliente\n3- Alterar valor do cheque especial\n4- Fazer transferência\n5- Adicionar saldo\n6- Imprimir relatório\n7- Consultar cliente\n"
+      );
 
       switch (opcao) {
         case 1:
@@ -164,7 +167,13 @@ public class Menu {
         case 6:
           break;
         case 7:
-          int tipoCliente = Scanner.lerValorInteiroComLimites(1, 2, "Tipo de cliente:\n1 - Físico\n2- Jurídico\n");
+          limparTela();
+          
+          int tipoCliente = Scanner.lerValorInteiroComLimites(
+            1,
+            2,
+            "Tipo de cliente:\n1 - Físico\n2- Jurídico\n"
+          );
 
           if (tipoCliente == 1) {
             exibirPessoaFisica();
@@ -183,7 +192,10 @@ public class Menu {
         );
 
       if (opcao == 2) break;
-
     } while (true);
+  }
+
+  public static void main(String[] args) {
+    new Menu().exibirMenu();
   }
 }
