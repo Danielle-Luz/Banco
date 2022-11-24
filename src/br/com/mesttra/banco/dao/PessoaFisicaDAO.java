@@ -12,7 +12,6 @@ import br.com.mesttra.banco.pojo.PessoaFisicaPojo;
 public class PessoaFisicaDAO {
   Connection connection = ConnectionFactory.getConnection();
 
-
   public ArrayList<PessoaFisicaPojo> retornaClientes (ResultSet cliente) throws SQLException {
     ArrayList<PessoaFisicaPojo> listaPessoas = new ArrayList<>();
 
