@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 
 public class Scanner {
 
-  public String lerValorAlfanumerico(String mensagem) {
+  public static String lerValorAlfanumerico(String mensagem) {
     java.util.Scanner scan = new java.util.Scanner(System.in);
 
     System.out.print(mensagem);
@@ -14,7 +14,7 @@ public class Scanner {
     return valor;
   }
 
-  public double lerValorMonetario(String mensagem) {
+  public static double lerValorMonetario(String mensagem) {
     double valor = 0;
 
     do {
@@ -34,7 +34,7 @@ public class Scanner {
     return valor;
   }
 
-  public int lerValorInteiro(String mensagem) {
+  public static int lerValorInteiro(String mensagem) {
     int valor = 0;
 
     do {
@@ -54,7 +54,7 @@ public class Scanner {
     return valor;
   }
 
-  public int lerValorInteiroComLimites (int min, int max, String mensagem) {
+  public static int lerValorInteiroComLimites (int min, int max, String mensagem) {
     while (true) {
       int valor = lerValorInteiro(mensagem);
 
