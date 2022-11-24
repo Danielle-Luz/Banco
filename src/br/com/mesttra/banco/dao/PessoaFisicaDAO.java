@@ -10,9 +10,9 @@ import br.com.mesttra.banco.connectionfactory.ConnectionFactory;
 import br.com.mesttra.banco.pojo.PessoaFisicaPojo;
 
 public class PessoaFisicaDAO {
-  Connection connection = ConnectionFactory.getConnection();
+  static Connection connection = ConnectionFactory.getConnection();
 
-  public ArrayList<PessoaFisicaPojo> retornaClientes (ResultSet cliente) throws SQLException {
+  static private ArrayList<PessoaFisicaPojo> retornaClientes (ResultSet cliente) throws SQLException {
     ArrayList<PessoaFisicaPojo> listaPessoas = new ArrayList<>();
 
     while(cliente.next()) {
@@ -33,7 +33,7 @@ public class PessoaFisicaDAO {
     return listaPessoas;
   }
 
-  public PessoaFisicaPojo consultarCliente (String numeroConta) {
+  static public PessoaFisicaPojo consultarCliente (String numeroConta) {
     PessoaFisicaPojo clienteEncontrado = null;
 
     String comando = "SELECT * FROM pessoa_fisica WHERE numeroConta = ?";
