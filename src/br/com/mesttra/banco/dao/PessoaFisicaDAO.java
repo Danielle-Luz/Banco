@@ -45,7 +45,10 @@ public class PessoaFisicaDAO {
 
       ArrayList<PessoaFisicaPojo> listaPessoas = retornaClientes(registro);
 
-      clienteEncontrado = listaPessoas.get(0);
+      if (!listaPessoas.isEmpty()) {
+        clienteEncontrado = listaPessoas.get(0);
+      }
+
     } catch (SQLException e) {
       e.printStackTrace();
     }

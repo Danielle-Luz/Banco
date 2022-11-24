@@ -18,8 +18,8 @@ public class PessoaJuridicaDAO {
 
     while(cliente.next()) {
       String cnpj = cliente.getString("cnpj");
-      String razaoSocial = cliente.getString("razaoSocial");
-      String nomeFantasia = cliente.getString("nomeFantasia");
+      String razaoSocial = cliente.getString("razao_social");
+      String nomeFantasia = cliente.getString("nome_Fantasia");
       String numeroConta = cliente.getString("numeroConta");
       int agencia = cliente.getInt("agencia");
       String telefone = cliente.getString("telefone");
