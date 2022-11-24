@@ -8,6 +8,11 @@ import br.com.mesttra.banco.scanner.Scanner;
 
 public class Menu {
 
+  private void limparTela() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+  }
+
   public void exibirAtributosPessoaFisica(
     int opcao,
     PessoaFisicaPojo clienteEncontrado
@@ -40,6 +45,9 @@ public class Menu {
   }
 
   public void exibirPessoaFisica() {
+
+    limparTela();
+
     String numeroConta = Scanner.lerValorAlfanumerico(
       "Insira o número da conta do cliente procurado: "
     );
@@ -102,6 +110,9 @@ public class Menu {
   }
 
   public void exibirPessoaJuridica() {
+    
+    limparTela();
+    
     String numeroConta = Scanner.lerValorAlfanumerico(
       "Insira o número da conta do cliente procurado: "
     );
