@@ -45,7 +45,6 @@ public class Menu {
   }
 
   public void exibirPessoaFisica() {
-
     limparTela();
 
     String numeroConta = Scanner.lerValorAlfanumerico(
@@ -110,9 +109,8 @@ public class Menu {
   }
 
   public void exibirPessoaJuridica() {
-    
     limparTela();
-    
+
     String numeroConta = Scanner.lerValorAlfanumerico(
       "Insira o número da conta do cliente procurado: "
     );
@@ -141,5 +139,51 @@ public class Menu {
 
       exibirAtributosPessoaJuridica(opcao, clienteEncontrado);
     }
+  }
+
+  public void mostrarMenu() {
+    do {
+      int opcao = 
+        Scanner.lerValorInteiroComLimites(
+          1,
+          7,
+          "Bem vindo, gerente.\nEscolha uma opção:\n1- Cadastrar cliente\n2- Remover cliente\n3- Alterar valor do cheque especial\n4- Fazer transferência\n5- Adicionar saldo\n6- Imprimir relatório\n7- Consultar cliente\n"
+        );
+
+      switch (opcao) {
+        case 1:
+          break;
+        case 2:
+          break;
+        case 3:
+          break;
+        case 4:
+          break;
+        case 5:
+          break;
+        case 6:
+          break;
+        case 7:
+          int tipoCliente = Scanner.lerValorInteiroComLimites(1, 2, "Tipo de cliente:\n1 - Físico\n2- Jurídico\n");
+
+          if (tipoCliente == 1) {
+            exibirPessoaFisica();
+          } else {
+            exibirPessoaJuridica();
+          }
+
+          break;
+      }
+
+      opcao =
+        Scanner.lerValorInteiroComLimites(
+          1,
+          2,
+          "Realizar nova operação?\n1- Sim\n2- Não\n"
+        );
+
+      if (opcao == 2) break;
+
+    } while (true);
   }
 }
