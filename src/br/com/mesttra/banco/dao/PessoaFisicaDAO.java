@@ -55,16 +55,15 @@ public class PessoaFisicaDAO {
 }
 
 public ArrayList<Clientes> imprimirRelatorio() {
-		String getPf = "SELECT * FROM pessoa_fisica";
+	String getPf = "SELECT * FROM pessoa_fisica";
 
-		try {
-			
+	try {
+		
+		return clientes;
 
-			return clientes;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return null
+	} catch (SQLException e) {
+		e.printStackTrace();
 	}
+
+	return null
+}
