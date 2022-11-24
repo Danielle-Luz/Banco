@@ -54,3 +54,18 @@ public class PessoaJuridicaDAO {
     return clienteEncontrado;
   }
 }
+
+public ArrayList<Clientes> imprimirRelatorio() {
+		String getPj = "SELECT * FROM pessoa_juridica";
+
+		try {
+			
+
+			return clientes;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null
+	}
