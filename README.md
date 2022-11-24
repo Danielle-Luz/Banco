@@ -7,7 +7,7 @@
 - Maykell Alvim de França
 - Danielle da Luz
 - Milena Sousa
-- Mateus Anchieta
+- Matheus Anchieta
 - Karla Andressa
 
 
@@ -21,7 +21,7 @@ Aqui estão listadas as atividades e qual membro do grupo é responsável para e
 -Gerar script BD --> Danielle
 
 
--Cadastro de clientes --> Mateus
+-Cadastro de clientes --> Matheus
 
 
 -Remover clientes --> Milena
@@ -30,7 +30,7 @@ Aqui estão listadas as atividades e qual membro do grupo é responsável para e
 -Consulta de clientes --> Danielle
 
 
--Transferência --> Mateus
+-Transferência --> Matheus
 
 
 -Adicionar saldo -->  Carla
@@ -38,7 +38,7 @@ Aqui estão listadas as atividades e qual membro do grupo é responsável para e
 
 -Imprimir relatório --> Maykell
 
--Criar o factory --> Mateus
+-Criar o factory --> Matheus
 
 
 -Criar o menu. --> Danielle
