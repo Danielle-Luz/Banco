@@ -56,7 +56,7 @@ public class PessoaFisicaDAO {
     return clienteEncontrado;
   }
 }
-
+/* 
 public ArrayList<Clientes> imprimirRelatorio() {
 	String getPf = "SELECT * FROM pessoa_fisica";
 
@@ -70,3 +70,4 @@ public ArrayList<Clientes> imprimirRelatorio() {
 
 	return null
 }
+ */

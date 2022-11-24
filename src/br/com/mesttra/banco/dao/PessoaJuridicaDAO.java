@@ -54,7 +54,7 @@ public class PessoaJuridicaDAO {
     return clienteEncontrado;
   }
 }
-
+/* 
 public ArrayList<Clientes> imprimirRelatorio() {
 		String getPj = "SELECT * FROM pessoa_juridica";
 
@@ -69,3 +69,4 @@ public ArrayList<Clientes> imprimirRelatorio() {
 
 		return null
 	}
+ */
