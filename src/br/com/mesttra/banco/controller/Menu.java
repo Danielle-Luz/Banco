@@ -164,7 +164,9 @@ public class Menu {
     } else {
       float valorAdicionado = (float) Scanner.lerValorMonetario("Insira o valor a ser adicionado: ");
 
-      ClienteDAO.atualizarCliente(clienteEncontrado, valorAdicionado, "saldo");
+      float novoSaldo = (float) clienteEncontrado.getSaldo() + valorAdicionado;
+
+      ClienteDAO.atualizarCliente(clienteEncontrado, novoSaldo, "saldo");
 
       System.out.println("Saldo atualizado com sucesso");
     }
@@ -188,6 +190,8 @@ public class Menu {
         case 4:
           break;
         case 5:
+          adicionarSaldo();
+
           break;
         case 6:
           break;
