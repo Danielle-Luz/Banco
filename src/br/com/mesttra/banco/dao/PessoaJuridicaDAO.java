@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import br.com.mesttra.banco.connectionfactory.ConnectionFactory;
@@ -12,17 +11,13 @@ import br.com.mesttra.banco.pojo.PessoaJuridicaPojo;
 
 public class PessoaJuridicaDAO {
 	
-	private Connection conexao;
-
-	public PessoaJuridicaDAO() {
-		this.conexao = ConnectionFactory.getConnection();
-	}
+  static Connection conexao = ConnectionFactory.getConnection();
 	
 	public boolean inserePJ (PessoaJuridicaPojo pj) {
 		String sql = "INSERT INTO pessoa_juridica (cnpj, razao_social, nome_fantasia, numeroConta, agencia, telefone, saldo, limiteCheque) "
 				   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
-			PreparedStatement stt = this.conexao.prepareStatement(sql);
+			PreparedStatement stt = conexao.prepareStatement(sql);
 			stt.setString(1, pj.getCnpj());
 			stt.setString(2, pj.getRazaoSocial());
 			stt.setString(3, pj.getNomeFantasia());
@@ -40,7 +35,6 @@ public class PessoaJuridicaDAO {
 			return false;
 		}
 	}
-  static Connection connection = ConnectionFactory.getConnection();
 
   static private ArrayList<PessoaJuridicaPojo> retornaClientes (ResultSet cliente) throws SQLException {
 
@@ -69,7 +63,7 @@ public class PessoaJuridicaDAO {
 
     String comando = "SELECT * FROM pessoa_juridica WHERE numeroConta = ?";
 
-    try (PreparedStatement query = connection.prepareStatement(comando)) {
+    try (PreparedStatement query = conexao.prepareStatement(comando)) {
       query.setString(1, numeroConta);
 
       ResultSet registro = query.executeQuery();

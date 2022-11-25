@@ -11,13 +11,9 @@ import br.com.mesttra.banco.pojo.PessoaFisicaPojo;
 
 public class ClienteDAO {
 	
-	private Connection conexao;
-
-	public ClienteDAO() {
-		this.conexao = ConnectionFactory.getConnection();
-	}
+  static private Connection conexao = ConnectionFactory.getConnection();
 	
-	public boolean transfereSaldo (ClientePojo contaTransferidora, ClientePojo contaReceptora, float valor) {
+	static public boolean transfereSaldo (ClientePojo contaTransferidora, ClientePojo contaReceptora, float valor) {
 		String transferidor = contaTransferidora instanceof PessoaFisicaPojo ? "pessoa_fisica" : "pessoa_juridica";
 		String receptor = contaReceptora instanceof PessoaFisicaPojo ? "pessoa_fisica" : "pessoa_juridica";
 		
@@ -30,11 +26,11 @@ public class ClienteDAO {
 		} else {
 			
 			try {
-				PreparedStatement stt1 = this.conexao.prepareStatement(transfere);
+				PreparedStatement stt1 = conexao.prepareStatement(transfere);
 				stt1.setFloat(1, valor);
 				stt1.execute();
 				stt1.close();
-				PreparedStatement stt2 = this.conexao.prepareStatement(recebe);
+				PreparedStatement stt2 = conexao.prepareStatement(recebe);
 				stt2.setFloat(1, valor);
 				stt2.execute();
 				stt2.close();
@@ -47,14 +43,12 @@ public class ClienteDAO {
 		}
 	}
 
-  static Connection connection = ConnectionFactory.getConnection();
-
   static public void atualizarCliente (ClientePojo cliente, Object valor, String coluna) {
     String nomeTabela = cliente instanceof PessoaFisicaPojo ? "pessoa_fisica" : "pessoa_juridica";
 
     String comando = String.format("UPDATE %s SET %s = ? WHERE numeroConta = '%s'", nomeTabela, coluna, cliente.getNumeroConta());
 
-    try (PreparedStatement sql = connection.prepareStatement(comando)) {
+    try (PreparedStatement sql = conexao.prepareStatement(comando)) {
       if (valor instanceof String) {
         sql.setString(1, (String) valor);
       } else if (valor instanceof Float) {

@@ -1,18 +1,14 @@
 package br.com.mesttra.banco.controller;
 
+import br.com.mesttra.banco.dao.ClienteDAO;
 import br.com.mesttra.banco.dao.PessoaFisicaDAO;
 import br.com.mesttra.banco.dao.PessoaJuridicaDAO;
-import br.com.mesttra.banco.dao.ClienteDAO;
+import br.com.mesttra.banco.pojo.ClientePojo;
 import br.com.mesttra.banco.pojo.PessoaFisicaPojo;
 import br.com.mesttra.banco.pojo.PessoaJuridicaPojo;
-import br.com.mesttra.banco.pojo.ClientePojo;
 import br.com.mesttra.banco.scanner.Scanner;
 
 public class Menu {
-
-  public Menu () {
-    super();
-  }
 
   private void limparTela() {
     System.out.print("\033[H\033[2J");
@@ -147,22 +143,30 @@ public class Menu {
     }
   }
 
-  public void adicionarSaldo () {
+  public void adicionarSaldo() {
     limparTela();
 
     String numeroConta = Scanner.lerValorAlfanumerico(
       "Insira o número da conta do cliente procurado: "
     );
 
-    PessoaJuridicaPojo pessoaJuridicaEncontrada = PessoaJuridicaDAO.consultarCliente(numeroConta);
-    PessoaFisicaPojo pessoaFisicaEncontrada = PessoaFisicaDAO.consultarCliente(numeroConta);
+    PessoaJuridicaPojo pessoaJuridicaEncontrada = PessoaJuridicaDAO.consultarCliente(
+      numeroConta
+    );
+    PessoaFisicaPojo pessoaFisicaEncontrada = PessoaFisicaDAO.consultarCliente(
+      numeroConta
+    );
 
-    ClientePojo clienteEncontrado = pessoaJuridicaEncontrada != null ? pessoaJuridicaEncontrada : pessoaFisicaEncontrada != null ? pessoaFisicaEncontrada : null;
+    ClientePojo clienteEncontrado = pessoaJuridicaEncontrada != null
+      ? pessoaJuridicaEncontrada
+      : pessoaFisicaEncontrada != null ? pessoaFisicaEncontrada : null;
 
     if (clienteEncontrado == null) {
       System.out.println("O cliente procurado não foi encontrado");
     } else {
-      float valorAdicionado = (float) Scanner.lerValorMonetario("Insira o valor a ser adicionado: ");
+      float valorAdicionado = (float) Scanner.lerValorMonetario(
+        "Insira o valor a ser adicionado: "
+      );
 
       float novoSaldo = (float) clienteEncontrado.getSaldo() + valorAdicionado;
 
@@ -197,7 +201,7 @@ public class Menu {
           break;
         case 7:
           limparTela();
-          
+
           int tipoCliente = Scanner.lerValorInteiroComLimites(
             1,
             2,
