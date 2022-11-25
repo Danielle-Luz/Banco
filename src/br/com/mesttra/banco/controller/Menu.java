@@ -345,6 +345,19 @@ public class Menu {
     }
   }
 
+  public void exibirTodosOsClientesCadastrados () {
+    ArrayList<PessoaFisicaPojo> pessoasFisicas = PessoaFisicaDAO.obterPessoasFisicas();
+    ArrayList<PessoaJuridicaPojo> pessoasJuridicas = PessoaJuridicaDAO.obterPessoasJuridicas();
+
+    ArrayList<ClientePojo> listaClientes = new ArrayList<>(pessoasFisicas);
+
+    listaClientes.addAll(pessoasJuridicas);
+
+    for (ClientePojo cliente : listaClientes) {
+      
+    }
+  }
+
   public void exibirMenu() {
     do {
       int opcao = Scanner.lerValorInteiroComLimites(
