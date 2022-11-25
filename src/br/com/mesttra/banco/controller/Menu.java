@@ -2,8 +2,10 @@ package br.com.mesttra.banco.controller;
 
 import br.com.mesttra.banco.dao.PessoaFisicaDAO;
 import br.com.mesttra.banco.dao.PessoaJuridicaDAO;
+import br.com.mesttra.banco.dao.ClienteDAO;
 import br.com.mesttra.banco.pojo.PessoaFisicaPojo;
 import br.com.mesttra.banco.pojo.PessoaJuridicaPojo;
+import br.com.mesttra.banco.pojo.ClientePojo;
 import br.com.mesttra.banco.scanner.Scanner;
 
 public class Menu {
@@ -146,7 +148,26 @@ public class Menu {
   }
 
   public void adicionarSaldo () {
-    
+    limparTela();
+
+    String numeroConta = Scanner.lerValorAlfanumerico(
+      "Insira o número da conta do cliente procurado: "
+    );
+
+    PessoaJuridicaPojo pessoaJuridicaEncontrada = PessoaJuridicaDAO.consultarCliente(numeroConta);
+    PessoaFisicaPojo pessoaFisicaEncontrada = PessoaFisicaDAO.consultarCliente(numeroConta);
+
+    ClientePojo clienteEncontrado = pessoaJuridicaEncontrada != null ? pessoaJuridicaEncontrada : pessoaFisicaEncontrada != null ? pessoaFisicaEncontrada : null;
+
+    if (clienteEncontrado == null) {
+      System.out.println("O cliente procurado não foi encontrado");
+    } else {
+      float valorAdicionado = (float) Scanner.lerValorMonetario("Insira o valor a ser adicionado: ");
+
+      ClienteDAO.atualizarCliente(clienteEncontrado, valorAdicionado, "saldo");
+
+      System.out.println("Saldo atualizado com sucesso");
+    }
   }
 
   public void exibirMenu() {

@@ -12,7 +12,7 @@ import br.com.mesttra.banco.pojo.PessoaFisicaPojo;
 public class ClienteDAO {
   static Connection connection = ConnectionFactory.getConnection();
 
-  static public void atualizaCliente (ClientePojo cliente, Object valor, String coluna) {
+  static public void atualizarCliente (ClientePojo cliente, Object valor, String coluna) {
     String nomeTabela = cliente instanceof PessoaFisicaPojo ? "pessoa_fisica" : "pessoa_juridica";
 
     String comando = String.format("UPDATE %s SET %s = ? WHERE numeroConta = '%s'", nomeTabela, coluna, cliente.getNumeroConta());
