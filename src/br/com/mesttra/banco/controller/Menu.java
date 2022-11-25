@@ -361,6 +361,8 @@ public class Menu {
   }
 
   public void excluirCliente () {
+    limparTela();
+    
     ClientePojo clienteEncontrado = pesquisaCliente(false, "Insira o número da conta do cliente a ser excluído: ");
 
     if (clienteEncontrado != null) {
