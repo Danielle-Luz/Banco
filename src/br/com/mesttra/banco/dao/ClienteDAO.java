@@ -13,20 +13,18 @@ public class ClienteDAO {
   private static Connection conexao = ConnectionFactory.getConnection();
 
   public static void atualizarCliente(
-    ClientePojo cliente,
-    Object valor,
-    String coluna
-  ) {
+      ClientePojo cliente,
+      Object valor,
+      String coluna) {
     String nomeTabela = cliente instanceof PessoaFisicaPojo
-      ? "pessoa_fisica"
-      : "pessoa_juridica";
+        ? "pessoa_fisica"
+        : "pessoa_juridica";
 
     String comando = String.format(
-      "UPDATE %s SET %s = ? WHERE numeroConta = '%s'",
-      nomeTabela,
-      coluna,
-      cliente.getNumeroConta()
-    );
+        "UPDATE %s SET %s = ? WHERE numeroConta = '%s'",
+        nomeTabela,
+        coluna,
+        cliente.getNumeroConta());
 
     try (PreparedStatement sql = conexao.prepareStatement(comando)) {
       if (valor instanceof String) {
@@ -41,5 +39,22 @@ public class ClienteDAO {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+  }
+
+  public static void removerCliente (ClientePojo cliente) {
+    String nomeTabela = cliente instanceof PessoaFisicaPojo
+      ? "pessoa_fisica"
+      : "pessoa_juridica";
+
+      String comando = String.format(
+      "DELETE FROM "+ nomeTabela +" WHERE numeroConta = '%s'", cliente.getNumeroConta());
+
+      try (PreparedStatement sql = conexao.prepareStatement(comando)) {
+        sql.execute();
+
+        System.out.println("Cliente excluído com sucesso");
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
   }
 }
