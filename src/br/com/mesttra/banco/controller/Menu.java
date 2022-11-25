@@ -215,9 +215,7 @@ public class Menu {
 
   public ClientePojo pesquisaCliente(boolean fazerLoop, String mensagem) {
     do {
-      String numeroConta = Scanner.lerValorAlfanumerico(
-        mensagem
-      );
+      String numeroConta = Scanner.lerValorAlfanumerico(mensagem);
 
       PessoaJuridicaPojo pessoaJuridicaEncontrada = PessoaJuridicaDAO.consultarCliente(
         numeroConta
@@ -253,16 +251,19 @@ public class Menu {
   public void adicionarSaldo() {
     limparTela();
 
-    ClientePojo clienteEncontrado = pesquisaCliente(false,"Insira o número da conta do cliente: ");
+    ClientePojo clienteEncontrado = pesquisaCliente(
+      false,
+      "Insira o número da conta do cliente: "
+    );
 
     if (clienteEncontrado == null) {
       System.out.println("O cliente procurado não foi encontrado");
     } else {
-      float valorAdicionado =  Scanner.lerValorMonetario(
+      float valorAdicionado = Scanner.lerValorMonetario(
         "Insira o valor a ser adicionado: "
       );
 
-      float novoSaldo =  clienteEncontrado.getSaldo() + valorAdicionado;
+      float novoSaldo = clienteEncontrado.getSaldo() + valorAdicionado;
 
       ClienteDAO.atualizarCliente(clienteEncontrado, novoSaldo, "saldo");
 
@@ -296,14 +297,49 @@ public class Menu {
   public void obtemDadosParaAtransferencia() {
     limparTela();
 
-    ClientePojo contaTransferidora = pesquisaCliente(true, "Insira o número da conta do cliente que fará a transferência: ");
-    ClientePojo contaReceptora = pesquisaCliente(true, "Insira o número da conta do cliente que receberá o montante: ");
+    ClientePojo contaTransferidora = pesquisaCliente(
+      true,
+      "Insira o número da conta do cliente que fará a transferência: "
+    );
+    ClientePojo contaReceptora = pesquisaCliente(
+      true,
+      "Insira o número da conta do cliente que receberá o montante: "
+    );
 
-    float valorTransferido =  Scanner.lerValorMonetario(
+    float valorTransferido = Scanner.lerValorMonetario(
       "Valor a ser transferido: "
     );
 
     realizaTransferencia(contaTransferidora, contaReceptora, valorTransferido);
+  }
+
+  public void alterarValorDoChequeEspecial () {
+    limparTela();
+
+    ClientePojo clienteEncontrado = pesquisaCliente(true, "Insira o número da conta do cliente a ter seu cheque especial alterado: ");
+
+    float valor = Scanner.lerValorMonetario("Valor a ser acrescentado/reduzido: ");
+
+    int opcao = Scanner.lerValorInteiroComLimites(1, 2, "Seleciona uma opção:\n1- Aumentar valor do cheque especial\n2- Reduzir valor do cheque especial");
+
+    if (opcao == 1) {
+      float novoValor = clienteEncontrado.getLimiteCheque() + valor;
+
+      ClienteDAO.atualizarCliente(clienteEncontrado, novoValor, "limiteCheque");
+
+      System.out.println("Cheque especial acrescido com sucesso");
+    } else {
+      
+      if (clienteEncontrado.getLimiteCheque() >= valor) {
+        float novoValor = clienteEncontrado.getLimiteCheque() - valor;
+
+        ClienteDAO.atualizarCliente(clienteEncontrado, novoValor, "limiteCheque");
+
+        System.out.println("Cheque especial reduzido com sucesso");
+      } else {
+        System.out.println("Não foi possível realizar a operação.\nO valor removido é inferior ao valor do cheque especial do cliente");
+      }
+    }
   }
 
   public void exibirMenu() {
