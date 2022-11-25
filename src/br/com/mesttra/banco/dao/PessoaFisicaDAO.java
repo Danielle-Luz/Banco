@@ -33,10 +33,8 @@ public class PessoaFisicaDAO {
       stt.execute();
       stt.close();
       System.out.println("\n[Cliente PF Cadastrado]\n");
-      return true;
     } catch (SQLException e) {
       System.err.println("\n[Erro ao Cadastrar Pessoa Física]\n");
-      return false;
     } catch (ClienteJaCadastradoException e) {
 			System.err.println(e.getMessage());
 		}
