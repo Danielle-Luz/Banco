@@ -320,7 +320,7 @@ public class Menu {
 
     float valor = Scanner.lerValorMonetario("Valor a ser acrescentado/reduzido: ");
 
-    int opcao = Scanner.lerValorInteiroComLimites(1, 2, "Seleciona uma opção:\n1- Aumentar valor do cheque especial\n2- Reduzir valor do cheque especial");
+    int opcao = Scanner.lerValorInteiroComLimites(1, 2, "Seleciona uma opção:\n1- Aumentar valor do cheque especial\n2- Reduzir valor do cheque especial\n");
 
     if (opcao == 1) {
       float novoValor = clienteEncontrado.getLimiteCheque() + valor;
