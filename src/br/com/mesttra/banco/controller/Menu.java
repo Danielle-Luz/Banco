@@ -346,6 +346,8 @@ public class Menu {
   }
 
   public void exibirTodosOsClientesCadastrados () {
+    limparTela();
+    
     ArrayList<PessoaFisicaPojo> pessoasFisicas = PessoaFisicaDAO.obterPessoasFisicas();
     ArrayList<PessoaJuridicaPojo> pessoasJuridicas = PessoaJuridicaDAO.obterPessoasJuridicas();
 
@@ -354,7 +356,7 @@ public class Menu {
     listaClientes.addAll(pessoasJuridicas);
 
     for (ClientePojo cliente : listaClientes) {
-      
+      System.out.println(cliente);
     }
   }
 
@@ -386,6 +388,8 @@ public class Menu {
 
           break;
         case 6:
+          exibirTodosOsClientesCadastrados();
+
           break;
         case 7:
           limparTela();
