@@ -54,7 +54,11 @@ public class Scanner {
     return valor;
   }
 
-  public static int lerValorInteiroComLimites (int min, int max, String mensagem) {
+  public static int lerValorInteiroComLimites(
+    int min,
+    int max,
+    String mensagem
+  ) {
     while (true) {
       int valor = lerValorInteiro(mensagem);
 

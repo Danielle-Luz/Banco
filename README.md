@@ -33,7 +33,7 @@ Aqui estão listadas as atividades e qual membro do grupo é responsável para e
 -Transferência --> Matheus
 
 
--Adicionar saldo -->  Karla
+-Adicionar saldo -->  Danielle
 
 
 -Imprimir relatório --> Maykell
