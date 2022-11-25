@@ -205,7 +205,7 @@ public class Menu {
         int opcao = Scanner.lerValorInteiroComLimites(1, 2, "Cadastrar novo cliente?\n1 - Sim\n2 - Não");
 
         if (opcao == 1) {
-          
+          cadastrarCliente();
         }
       }
     } while (true);
