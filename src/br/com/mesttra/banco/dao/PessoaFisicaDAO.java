@@ -12,7 +12,7 @@ public class PessoaFisicaDAO {
 
   static Connection conexao = ConnectionFactory.getConnection();
 
-  public static boolean inserePF(PessoaFisicaPojo pf) {
+  public static void inserePF(PessoaFisicaPojo pf) {
     String cadastro =
       "INSERT INTO pessoa_fisica (cpf, nome, data_nascimento, numeroConta, agencia, telefone, saldo, limiteCheque) " +
       "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";

@@ -12,11 +12,11 @@ public class PessoaJuridicaDAO {
 
   static Connection conexao = ConnectionFactory.getConnection();
 
-  public static boolean inserePJ(PessoaJuridicaPojo pj) {
+  public static void inserePJ(PessoaJuridicaPojo pj) {
     String sql =
       "INSERT INTO pessoa_juridica (cnpj, razao_social, nome_fantasia, numeroConta, agencia, telefone, saldo, limiteCheque) " +
       "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-			
+
     try {
       boolean clienteJaCadastrado =
         PessoaFisicaDAO.consultarCliente(pj.getNumeroConta()) != null;
