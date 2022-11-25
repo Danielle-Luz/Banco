@@ -143,23 +143,43 @@ public class Menu {
     }
   }
 
+  public ClientePojo pesquisaCliente (boolean fazerLoop) {
+    do {
+      String numeroConta = Scanner.lerValorAlfanumerico(
+        "Insira o número da conta do cliente procurado: "
+      );
+  
+      PessoaJuridicaPojo pessoaJuridicaEncontrada = PessoaJuridicaDAO.consultarCliente(
+        numeroConta
+      );
+      PessoaFisicaPojo pessoaFisicaEncontrada = PessoaFisicaDAO.consultarCliente(
+        numeroConta
+      );
+  
+      ClientePojo clienteEncontrado = pessoaJuridicaEncontrada != null
+        ? pessoaJuridicaEncontrada
+        : pessoaFisicaEncontrada != null ? pessoaFisicaEncontrada : null;
+
+      if (clienteEncontrado != null) {
+        return clienteEncontrado;
+      } else if (!fazerLoop) {
+        return null;
+      } else {
+        System.out.println("Cliente não encontrado");
+        
+        int opcao = Scanner.lerValorInteiroComLimites(1, 2, "Cadastrar novo cliente?\n1 - Sim\n2 - Não");
+
+        if (opcao == 1) {
+          
+        }
+      }
+    } while (true);
+  }
+
   public void adicionarSaldo() {
     limparTela();
 
-    String numeroConta = Scanner.lerValorAlfanumerico(
-      "Insira o número da conta do cliente procurado: "
-    );
-
-    PessoaJuridicaPojo pessoaJuridicaEncontrada = PessoaJuridicaDAO.consultarCliente(
-      numeroConta
-    );
-    PessoaFisicaPojo pessoaFisicaEncontrada = PessoaFisicaDAO.consultarCliente(
-      numeroConta
-    );
-
-    ClientePojo clienteEncontrado = pessoaJuridicaEncontrada != null
-      ? pessoaJuridicaEncontrada
-      : pessoaFisicaEncontrada != null ? pessoaFisicaEncontrada : null;
+    ClientePojo clienteEncontrado = pesquisaCliente(false);
 
     if (clienteEncontrado == null) {
       System.out.println("O cliente procurado não foi encontrado");
@@ -176,6 +196,40 @@ public class Menu {
     }
   }
 
+  public void realizaTransferencia(
+    ClientePojo contaTransferidora,
+    ClientePojo contaReceptora,
+    float valor
+  ) {
+    if (contaTransferidora.getSaldo() < valor) {
+      System.err.println("Saldo insuficiente");
+    } else {
+      ClienteDAO.atualizarCliente(
+        contaTransferidora,
+        contaTransferidora.getSaldo() - valor,
+        "saldo"
+      );
+      ClienteDAO.atualizarCliente(
+        contaReceptora,
+        contaReceptora.getSaldo() + valor,
+        "saldo"
+      );
+
+      System.out.println("\n[Transferência realizada com sucesso]\n");
+    }
+  }
+  
+  public void obtemDadosParaAtransferencia () {
+    limparTela();
+
+    ClientePojo contaTransferidora = pesquisaCliente (true);
+    ClientePojo contaReceptora = pesquisaCliente(true);
+
+    float valorTransferido = (float) Scanner.lerValorMonetario("Valor a ser transferido: ");
+
+    realizaTransferencia(contaTransferidora, contaReceptora, valorTransferido);
+  }
+  
   public void exibirMenu() {
     do {
       int opcao = Scanner.lerValorInteiroComLimites(
@@ -192,6 +246,8 @@ public class Menu {
         case 3:
           break;
         case 4:
+          obtemDadosParaAtransferencia();
+
           break;
         case 5:
           adicionarSaldo();

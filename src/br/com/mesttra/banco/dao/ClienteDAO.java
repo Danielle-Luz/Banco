@@ -11,32 +11,6 @@ public class ClienteDAO {
 
   private static Connection conexao = ConnectionFactory.getConnection();
 
-  public static boolean transfereSaldo(
-    ClientePojo contaTransferidora,
-    ClientePojo contaReceptora,
-    float valor
-  ) {
-    if (contaTransferidora.getSaldo() < valor) {
-      System.err.println("Saldo insuficiente");
-    } else {
-      atualizarCliente(
-        contaTransferidora,
-        contaTransferidora.getSaldo() - valor,
-        "saldo"
-      );
-      atualizarCliente(
-        contaReceptora,
-        contaReceptora.getSaldo() + valor,
-        "saldo"
-      );
-
-      System.out.println("\n[Transferência realizada com sucesso]\n");
-      return true;
-    }
-
-    return false;
-  }
-
   public static void atualizarCliente(
     ClientePojo cliente,
     Object valor,
