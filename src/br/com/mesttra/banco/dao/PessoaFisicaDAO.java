@@ -17,6 +17,10 @@ public class PessoaFisicaDAO {
       "INSERT INTO pessoa_fisica (cpf, nome, data_nascimento, numeroConta, agencia, telefone, saldo, limiteCheque) " +
       "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     try {
+			boolean clienteJaCadastrado = PessoaJuridicaDAO.consultarCliente(pf.getNumeroConta()) != null;
+
+			if(clienteJaCadastrado) throw new ClienteJaCadastradoException("O número de conta já pertence a uma pessoa jurídica");
+
       PreparedStatement stt = conexao.prepareStatement(cadastro);
       stt.setString(1, pf.getCpf());
       stt.setString(2, pf.getNome());
@@ -33,7 +37,9 @@ public class PessoaFisicaDAO {
     } catch (SQLException e) {
       System.err.println("\n[Erro ao Cadastrar Pessoa Física]\n");
       return false;
-    }
+    } catch (ClienteJaCadastradoException e) {
+			System.err.println(e.getMessage());
+		}
   }
 
   private static ArrayList<PessoaFisicaPojo> retornaClientes(ResultSet cliente)
