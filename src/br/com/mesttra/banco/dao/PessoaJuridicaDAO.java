@@ -95,20 +95,22 @@ public class PessoaJuridicaDAO {
 
     return clienteEncontrado;
   }
+
+  public ArrayList<PessoaJuridicaPojo> imprimirRelatorio() {
+    String query = "SELECT * FROM pessoa_juridica";
+
+    ArrayList<PessoaJuridicaPojo> listaPessoas = null;
+
+    try {
+      PreparedStatement sql = conexao.prepareStatement(query);
+  
+      ResultSet pessoasJuridicas = sql.executeQuery();
+  
+      listaPessoas = retornaClientes(pessoasJuridicas);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    return listaPessoas;
+  }
 }
-/* 
-public ArrayList<Clientes> imprimirRelatorio() {
-		String getPj = "SELECT * FROM pessoa_juridica";
-
-		try {
-			
-
-			return clientes;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return null
-	}
- */
