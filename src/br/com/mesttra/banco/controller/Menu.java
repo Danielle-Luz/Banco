@@ -15,40 +15,71 @@ public class Menu {
     System.out.flush();
   }
 
-  public void cadastrarCliente () {
+  public void cadastrarCliente() {
     limparTela();
 
-    String numeroConta = Scanner.lerValorAlfanumerico("Insira o número da conta do cliente: ");
+    String numeroConta = Scanner.lerValorAlfanumerico(
+      "Insira o número da conta do cliente: "
+    );
 
     int agencia = Scanner.lerValorInteiro("Insira a agência: ");
 
-    double saldo = Scanner.lerValorMonetario("Insira o saldo: ");
-    
-    double limiteCheque = Scanner.lerValorMonetario("Insira o limite do cheque: ");
+    float saldo = Scanner.lerValorMonetario("Insira o saldo: ");
+
+    float limiteCheque = Scanner.lerValorMonetario(
+      "Insira o limite do cheque: "
+    );
 
     String telefone = Scanner.lerValorAlfanumerico("Insira o telefone: ");
 
-    int tipoCliente = Scanner.lerValorInteiroComLimites(1, 2, "Tipo de cliente:\n1- Pessoa física\n2- Pessoa jurídica\n");
+    int tipoCliente = Scanner.lerValorInteiroComLimites(
+      1,
+      2,
+      "Tipo de cliente:\n1- Pessoa física\n2- Pessoa jurídica\n"
+    );
 
     if (tipoCliente == 1) {
+      String cpf = Scanner.lerValorAlfanumerico("Insira o CPF: ");
+      String nome = Scanner.lerValorAlfanumerico("Insira o nome do cliente: ");
+      String dataNascimento = Scanner.lerValorAlfanumerico(
+        "Insira a data de nascimento do cliente: "
+      );
 
-        String cpf = Scanner.lerValorAlfanumerico("Insira o CPF: ");
-        String nome = Scanner.lerValorAlfanumerico("Insira o nome do cliente: ");
-        String dataNascimento = Scanner.lerValorAlfanumerico("Insira a data de nascimento do cliente: ");
+      PessoaFisicaPojo novoCliente = new PessoaFisicaPojo(
+        cpf,
+        nome,
+        dataNascimento,
+        numeroConta,
+        agencia,
+        telefone,
+        saldo,
+        limiteCheque
+      );
 
-        PessoaFisicaPojo novoCliente = new PessoaFisicaPojo(cpf, nome, dataNascimento, numeroConta, agencia, telefone, saldo, limiteCheque);
-
-        PessoaFisicaDAO.inserePF(novoCliente);
+      PessoaFisicaDAO.inserePF(novoCliente);
     } else {
-        String cnpj = Scanner.lerValorAlfanumerico("Insira o CNPJ do cliente: ");
-        String razaoSocial = Scanner.lerValorAlfanumerico("Insira a razão social: ");
-        String nomeFantasia = Scanner.lerValorAlfanumerico("Insira o nome fantasia: ");
+      String cnpj = Scanner.lerValorAlfanumerico("Insira o CNPJ do cliente: ");
+      String razaoSocial = Scanner.lerValorAlfanumerico(
+        "Insira a razão social: "
+      );
+      String nomeFantasia = Scanner.lerValorAlfanumerico(
+        "Insira o nome fantasia: "
+      );
 
-        PessoaJuridicaPojo novoCliente = new PessoaJuridicaPojo(cnpj, razaoSocial, nomeFantasia, numeroConta, agencia, telefone, saldo, limiteCheque);
+      PessoaJuridicaPojo novoCliente = new PessoaJuridicaPojo(
+        cnpj,
+        razaoSocial,
+        nomeFantasia,
+        numeroConta,
+        agencia,
+        telefone,
+        saldo,
+        limiteCheque
+      );
 
-        PessoaJuridicaDAO.inserePJ(novoCliente);
+      PessoaJuridicaDAO.inserePJ(novoCliente);
     }
-}
+  }
 
   public void exibirAtributosPessoaFisica(
     int opcao,
@@ -178,19 +209,19 @@ public class Menu {
     }
   }
 
-  public ClientePojo pesquisaCliente (boolean fazerLoop) {
+  public ClientePojo pesquisaCliente(boolean fazerLoop) {
     do {
       String numeroConta = Scanner.lerValorAlfanumerico(
         "Insira o número da conta do cliente procurado: "
       );
-  
+
       PessoaJuridicaPojo pessoaJuridicaEncontrada = PessoaJuridicaDAO.consultarCliente(
         numeroConta
       );
       PessoaFisicaPojo pessoaFisicaEncontrada = PessoaFisicaDAO.consultarCliente(
         numeroConta
       );
-  
+
       ClientePojo clienteEncontrado = pessoaJuridicaEncontrada != null
         ? pessoaJuridicaEncontrada
         : pessoaFisicaEncontrada != null ? pessoaFisicaEncontrada : null;
@@ -201,8 +232,12 @@ public class Menu {
         return null;
       } else {
         System.out.println("Cliente não encontrado");
-        
-        int opcao = Scanner.lerValorInteiroComLimites(1, 2, "Cadastrar novo cliente?\n1 - Sim\n2 - Não");
+
+        int opcao = Scanner.lerValorInteiroComLimites(
+          1,
+          2,
+          "Cadastrar novo cliente?\n1 - Sim\n2 - Não"
+        );
 
         if (opcao == 1) {
           cadastrarCliente();
@@ -219,11 +254,11 @@ public class Menu {
     if (clienteEncontrado == null) {
       System.out.println("O cliente procurado não foi encontrado");
     } else {
-      float valorAdicionado = (float) Scanner.lerValorMonetario(
+      float valorAdicionado =  Scanner.lerValorMonetario(
         "Insira o valor a ser adicionado: "
       );
 
-      float novoSaldo = (float) clienteEncontrado.getSaldo() + valorAdicionado;
+      float novoSaldo =  clienteEncontrado.getSaldo() + valorAdicionado;
 
       ClienteDAO.atualizarCliente(clienteEncontrado, novoSaldo, "saldo");
 
@@ -253,18 +288,20 @@ public class Menu {
       System.out.println("\n[Transferência realizada com sucesso]\n");
     }
   }
-  
-  public void obtemDadosParaAtransferencia () {
+
+  public void obtemDadosParaAtransferencia() {
     limparTela();
 
-    ClientePojo contaTransferidora = pesquisaCliente (true);
+    ClientePojo contaTransferidora = pesquisaCliente(true);
     ClientePojo contaReceptora = pesquisaCliente(true);
 
-    float valorTransferido = (float) Scanner.lerValorMonetario("Valor a ser transferido: ");
+    float valorTransferido =  Scanner.lerValorMonetario(
+      "Valor a ser transferido: "
+    );
 
     realizaTransferencia(contaTransferidora, contaReceptora, valorTransferido);
   }
-  
+
   public void exibirMenu() {
     do {
       int opcao = Scanner.lerValorInteiroComLimites(

@@ -17,9 +17,12 @@ public class PessoaFisicaDAO {
       "INSERT INTO pessoa_fisica (cpf, nome, data_nascimento, numeroConta, agencia, telefone, saldo, limiteCheque) " +
       "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     try {
-			boolean clienteJaCadastrado = PessoaJuridicaDAO.consultarCliente(pf.getNumeroConta()) != null;
+      boolean clienteJaCadastrado =
+        PessoaJuridicaDAO.consultarCliente(pf.getNumeroConta()) != null;
 
-			if(clienteJaCadastrado) throw new ClienteJaCadastradoException("O número de conta já pertence a uma pessoa jurídica");
+      if (clienteJaCadastrado) throw new ClienteJaCadastradoException(
+        "O número de conta já pertence a uma pessoa jurídica"
+      );
 
       PreparedStatement stt = conexao.prepareStatement(cadastro);
       stt.setString(1, pf.getCpf());
@@ -28,16 +31,16 @@ public class PessoaFisicaDAO {
       stt.setString(4, pf.getNumeroConta());
       stt.setInt(5, pf.getAgencia());
       stt.setString(6, pf.getTelefone());
-      stt.setDouble(7, pf.getSaldo());
-      stt.setDouble(8, pf.getLimiteCheque());
+      stt.setFloat(7, pf.getSaldo());
+      stt.setFloat(8, pf.getLimiteCheque());
       stt.execute();
       stt.close();
       System.out.println("\n[Cliente PF Cadastrado]\n");
     } catch (SQLException e) {
       System.err.println("\n[Erro ao Cadastrar Pessoa Física]\n");
     } catch (ClienteJaCadastradoException e) {
-			System.err.println(e.getMessage());
-		}
+      System.err.println(e.getMessage());
+    }
   }
 
   private static ArrayList<PessoaFisicaPojo> retornaClientes(ResultSet cliente)

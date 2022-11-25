@@ -32,8 +32,8 @@ public class PessoaJuridicaDAO {
       stt.setString(4, pj.getNumeroConta());
       stt.setInt(5, pj.getAgencia());
       stt.setString(6, pj.getTelefone());
-      stt.setDouble(7, pj.getSaldo());
-      stt.setDouble(8, pj.getLimiteCheque());
+      stt.setFloat(7, pj.getSaldo());
+      stt.setFloat(8, pj.getLimiteCheque());
       stt.execute();
       stt.close();
       System.out.println("\n[Cliente PJ Cadastrado]\n");
@@ -88,7 +88,7 @@ public class PessoaJuridicaDAO {
 
       ArrayList<PessoaJuridicaPojo> listaPessoas = retornaClientes(registro);
 
-			if (!listaPessoas.isEmpty()) clienteEncontrado = listaPessoas.get(0);
+      if (!listaPessoas.isEmpty()) clienteEncontrado = listaPessoas.get(0);
     } catch (SQLException e) {
       e.printStackTrace();
     }

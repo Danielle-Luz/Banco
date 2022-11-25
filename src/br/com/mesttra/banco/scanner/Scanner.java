@@ -14,8 +14,8 @@ public class Scanner {
     return valor;
   }
 
-  public static double lerValorMonetario(String mensagem) {
-    double valor = 0;
+  public static float lerValorMonetario(String mensagem) {
+    float valor = 0;
 
     do {
       java.util.Scanner scan = new java.util.Scanner(System.in);

@@ -1,57 +1,64 @@
 package br.com.mesttra.banco.pojo;
 
 public class ClientePojo {
+
   private String numeroConta;
   private int agencia;
   private String telefone;
-  private double saldo;
-  private double limiteCheque;
+  private float saldo;
+  private float limiteCheque;
 
-  public ClientePojo (String numeroConta, int agencia, String telefone, double saldo, double limiteCheque) {
-     this.agencia = agencia;
-     this.numeroConta = numeroConta;
-     this.telefone = telefone;
-     this.saldo = saldo;
-     this.limiteCheque = limiteCheque;
+  public ClientePojo(
+    String numeroConta,
+    int agencia,
+    String telefone,
+    float saldo,
+    float limiteCheque
+  ) {
+    this.agencia = agencia;
+    this.numeroConta = numeroConta;
+    this.telefone = telefone;
+    this.saldo = saldo;
+    this.limiteCheque = limiteCheque;
   }
 
   public String getNumeroConta() {
-      return numeroConta;
+    return numeroConta;
   }
 
   public int getAgencia() {
-      return agencia;
+    return agencia;
   }
 
   public String getTelefone() {
-      return telefone;
+    return telefone;
   }
 
-  public double getSaldo() {
-      return saldo;
+  public float getSaldo() {
+    return saldo;
   }
 
-  public double getLimiteCheque() {
-      return limiteCheque;
+  public float getLimiteCheque() {
+    return limiteCheque;
   }
 
-  public void setSaldo (double saldo) {
-      this.saldo = saldo;
+  public void setSaldo(float saldo) {
+    this.saldo = saldo;
   }
 
-  public void aumentarSaldo (double valor) {
-      this.saldo += valor;
+  public void aumentarSaldo(float valor) {
+    this.saldo += valor;
   }
 
-  public void diminuirSaldo (double valor) {
-      this.saldo -= valor;
+  public void diminuirSaldo(float valor) {
+    this.saldo -= valor;
   }
 
-  public void aumentarCheque (double valor) {
-      this.limiteCheque += valor;
+  public void aumentarCheque(float valor) {
+    this.limiteCheque += valor;
   }
 
-  public void diminuirCheque (double valor) {
-      this.limiteCheque -= valor;
+  public void diminuirCheque(float valor) {
+    this.limiteCheque -= valor;
   }
 }
