@@ -15,7 +15,7 @@ public class Menu {
     System.out.flush();
   }
 
-  public void cadastrarCliente() {
+  public ClientePojo cadastrarCliente() {
     limparTela();
 
     String numeroConta = Scanner.lerValorAlfanumerico(
@@ -57,6 +57,8 @@ public class Menu {
       );
 
       PessoaFisicaDAO.inserePF(novoCliente);
+
+      return novoCliente;
     } else {
       String cnpj = Scanner.lerValorAlfanumerico("Insira o CNPJ do cliente: ");
       String razaoSocial = Scanner.lerValorAlfanumerico(
@@ -78,6 +80,8 @@ public class Menu {
       );
 
       PessoaJuridicaDAO.inserePJ(novoCliente);
+
+      return novoCliente;
     }
   }
 
@@ -240,7 +244,7 @@ public class Menu {
         );
 
         if (opcao == 1) {
-          cadastrarCliente();
+          return cadastrarCliente();
         }
       }
     } while (true);
