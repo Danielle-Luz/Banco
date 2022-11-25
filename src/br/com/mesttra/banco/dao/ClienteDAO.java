@@ -6,6 +6,7 @@ import br.com.mesttra.banco.pojo.PessoaFisicaPojo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ClienteDAO {
 

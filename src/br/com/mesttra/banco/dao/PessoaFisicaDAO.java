@@ -13,16 +13,15 @@ public class PessoaFisicaDAO {
   static Connection conexao = ConnectionFactory.getConnection();
 
   public static void inserePF(PessoaFisicaPojo pf) {
-    String cadastro =
-      "INSERT INTO pessoa_fisica (cpf, nome, data_nascimento, numeroConta, agencia, telefone, saldo, limiteCheque) " +
-      "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    String cadastro = "INSERT INTO pessoa_fisica (cpf, nome, data_nascimento, numeroConta, agencia, telefone, saldo, limiteCheque) "
+        +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     try {
-      boolean clienteJaCadastrado =
-        PessoaJuridicaDAO.consultarCliente(pf.getNumeroConta()) != null;
+      boolean clienteJaCadastrado = PessoaJuridicaDAO.consultarCliente(pf.getNumeroConta()) != null;
 
-      if (clienteJaCadastrado) throw new ClienteJaCadastradoException(
-        "O número de conta já pertence a uma pessoa jurídica"
-      );
+      if (clienteJaCadastrado)
+        throw new ClienteJaCadastradoException(
+            "O número de conta já pertence a uma pessoa jurídica");
 
       PreparedStatement stt = conexao.prepareStatement(cadastro);
       stt.setString(1, pf.getCpf());
@@ -44,7 +43,7 @@ public class PessoaFisicaDAO {
   }
 
   private static ArrayList<PessoaFisicaPojo> retornaClientes(ResultSet cliente)
-    throws SQLException {
+      throws SQLException {
     ArrayList<PessoaFisicaPojo> listaPessoas = new ArrayList<>();
 
     while (cliente.next()) {
@@ -58,15 +57,14 @@ public class PessoaFisicaDAO {
       float limiteCheque = cliente.getFloat("limiteCheque");
 
       PessoaFisicaPojo pessoaFisica = new PessoaFisicaPojo(
-        cpf,
-        nome,
-        dataNascimento,
-        numeroConta,
-        agencia,
-        telefone,
-        saldo,
-        limiteCheque
-      );
+          cpf,
+          nome,
+          dataNascimento,
+          numeroConta,
+          agencia,
+          telefone,
+          saldo,
+          limiteCheque);
 
       listaPessoas.add(pessoaFisica);
     }
@@ -95,19 +93,22 @@ public class PessoaFisicaDAO {
 
     return clienteEncontrado;
   }
+
+  public ArrayList<PessoaFisicaPojo> imprimirRelatorio() {
+    String query = "SELECT * FROM pessoa_fisica";
+
+    ArrayList<PessoaFisicaPojo> listaPessoas = null;
+
+    try {
+      PreparedStatement sql = conexao.prepareStatement(query);
+  
+      ResultSet pessoasFisicas = sql.executeQuery();
+  
+      listaPessoas = retornaClientes(pessoasFisicas);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    return listaPessoas;
+  }
 }
-/* 
-public ArrayList<Clientes> imprimirRelatorio() {
-	String getPf = "SELECT * FROM pessoa_fisica";
-
-	try {
-		
-		return clientes;
-
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-
-	return null
-}
- */
