@@ -94,7 +94,7 @@ public class PessoaFisicaDAO {
     return clienteEncontrado;
   }
 
-  public ArrayList<PessoaFisicaPojo> imprimirRelatorio() {
+  public static ArrayList<PessoaFisicaPojo> obterPessoasFisicas() {
     String query = "SELECT * FROM pessoa_fisica";
 
     ArrayList<PessoaFisicaPojo> listaPessoas = null;
