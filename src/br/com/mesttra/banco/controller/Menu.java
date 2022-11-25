@@ -358,6 +358,8 @@ public class Menu {
         case 2:
           break;
         case 3:
+          alterarValorDoChequeEspecial();
+
           break;
         case 4:
           obtemDadosParaAtransferencia();
