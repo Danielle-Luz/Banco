@@ -12,17 +12,19 @@ import br.com.mesttra.banco.pojo.PessoaFisicaPojo;
 public class ClienteDAO {
   static Connection connection = ConnectionFactory.getConnection();
 
-  static public void adicionaSaldo (ClientePojo cliente, float valor) {
-    float novoSaldo = (float) cliente.getSaldo() + valor;
-    String contaCliente = cliente.getNumeroConta();
-
+  static public void atualizaCliente (ClientePojo cliente, Object valor, String coluna) {
     String nomeTabela = cliente instanceof PessoaFisicaPojo ? "pessoa_fisica" : "pessoa_juridica";
 
-    String comando = "UPDATE " + nomeTabela + " SET saldo = ? WHERE numeroConta = ?";
+    String comando = String.format("UPDATE %s SET %s = ? WHERE numeroConta = '%s'", nomeTabela, coluna, cliente.getNumeroConta());
 
     try (PreparedStatement sql = connection.prepareStatement(comando)) {
-      sql.setFloat(1, novoSaldo);
-      sql.setString(1, contaCliente);
+      if (valor instanceof String) {
+        sql.setString(1, (String) valor);
+      } else if (valor instanceof Float) {
+        sql.setFloat(1, (float) valor);
+      } else {
+        sql.setInt(1, (int) valor);
+      }
 
       sql.executeUpdate();
     } catch (SQLException e) {
