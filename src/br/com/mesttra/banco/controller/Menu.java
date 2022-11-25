@@ -275,6 +275,8 @@ public class Menu {
 
       switch (opcao) {
         case 1:
+          cadastrarCliente();
+
           break;
         case 2:
           break;
