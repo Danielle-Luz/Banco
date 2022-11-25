@@ -15,6 +15,42 @@ public class Menu {
     System.out.flush();
   }
 
+  public ClientePojo criarCliente () {
+    limparTela();
+
+    ClientePojo novoCliente;
+
+    String numeroConta = Scanner.lerValorAlfanumerico("Insira o número da conta do cliente: ");
+
+    int agencia = Scanner.lerValorInteiro("Insira a agência: ");
+
+    double saldo = Scanner.lerValorMonetario("Insira o saldo: ");
+    
+    double limiteCheque = Scanner.lerValorMonetario("Insira o limite do cheque: ");
+
+    String telefone = Scanner.lerValorAlfanumerico("Insira o telefone: ");
+
+    int tipoCliente = Scanner.lerValorInteiroComLimites(1, 2, "Tipo de cliente:\n1- Pessoa física\n2- Pessoa jurídica\n");
+
+    if (tipoCliente == 1) {
+
+        String cpf = Scanner.lerValorAlfanumerico("Insira o CPF: ");
+        String nome = Scanner.lerValorAlfanumerico("Insira o nome do cliente: ");
+        String dataNascimento = Scanner.lerValorAlfanumerico("Insira a data de nascimento do cliente: ");
+
+        novoCliente = new PessoaFisicaPojo(cpf, nome, dataNascimento, numeroConta, agencia, telefone, saldo, limiteCheque);
+
+    } else {
+        String cnpj = Scanner.lerValorAlfanumerico("Insira o CNPJ do cliente: ");
+        String razaoSocial = Scanner.lerValorAlfanumerico("Insira a razão social: ");
+        String nomeFantasia = Scanner.lerValorAlfanumerico("Insira o nome fantasia: ");
+
+        novoCliente = new PessoaJuridicaPojo(cnpj, razaoSocial, nomeFantasia, numeroConta, agencia, telefone, saldo, limiteCheque);
+    }
+
+    return novoCliente;
+}
+
   public void exibirAtributosPessoaFisica(
     int opcao,
     PessoaFisicaPojo clienteEncontrado
