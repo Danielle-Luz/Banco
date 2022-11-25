@@ -41,20 +41,20 @@ public class ClienteDAO {
     }
   }
 
-  public static void removerCliente (ClientePojo cliente) {
+  public static void removerCliente(ClientePojo cliente) {
     String nomeTabela = cliente instanceof PessoaFisicaPojo
-      ? "pessoa_fisica"
-      : "pessoa_juridica";
+        ? "pessoa_fisica"
+        : "pessoa_juridica";
 
-      String comando = String.format(
-      "DELETE FROM "+ nomeTabela +" WHERE numeroConta = '%s'", cliente.getNumeroConta());
+    String comando = String.format(
+        "DELETE FROM " + nomeTabela + " WHERE numeroConta = '%s'", cliente.getNumeroConta());
 
-      try (PreparedStatement sql = conexao.prepareStatement(comando)) {
-        sql.execute();
+    try (PreparedStatement sql = conexao.prepareStatement(comando)) {
+      sql.execute();
 
-        System.out.println("Cliente excluído com sucesso");
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
+      System.out.println("Cliente excluído com sucesso");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }

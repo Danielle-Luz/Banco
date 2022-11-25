@@ -347,7 +347,7 @@ public class Menu {
 
   public void exibirTodosOsClientesCadastrados () {
     limparTela();
-    
+
     ArrayList<PessoaFisicaPojo> pessoasFisicas = PessoaFisicaDAO.obterPessoasFisicas();
     ArrayList<PessoaJuridicaPojo> pessoasJuridicas = PessoaJuridicaDAO.obterPessoasJuridicas();
 
@@ -357,6 +357,18 @@ public class Menu {
 
     for (ClientePojo cliente : listaClientes) {
       System.out.println(cliente);
+    }
+  }
+
+  public void excluirCliente () {
+    ClientePojo clienteEncontrado = pesquisaCliente(false, "Insira o número da conta do cliente a ser excluído: ");
+
+    if (clienteEncontrado != null) {
+      ClienteDAO.removerCliente(clienteEncontrado);
+
+      System.out.println("Cliente removido com sucesso");
+    } else {
+      System.out.println("Cliente não encontrado, não foi possível remover o cliente.");
     }
   }
 
