@@ -13,7 +13,7 @@ public class PessoaJuridicaDAO {
 	
   static Connection conexao = ConnectionFactory.getConnection();
 	
-	public boolean inserePJ (PessoaJuridicaPojo pj) {
+	static public boolean inserePJ (PessoaJuridicaPojo pj) {
 		String sql = "INSERT INTO pessoa_juridica (cnpj, razao_social, nome_fantasia, numeroConta, agencia, telefone, saldo, limiteCheque) "
 				   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		try {

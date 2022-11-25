@@ -15,10 +15,8 @@ public class Menu {
     System.out.flush();
   }
 
-  public ClientePojo criarCliente () {
+  public void cadastrarCliente () {
     limparTela();
-
-    ClientePojo novoCliente;
 
     String numeroConta = Scanner.lerValorAlfanumerico("Insira o número da conta do cliente: ");
 
@@ -38,17 +36,18 @@ public class Menu {
         String nome = Scanner.lerValorAlfanumerico("Insira o nome do cliente: ");
         String dataNascimento = Scanner.lerValorAlfanumerico("Insira a data de nascimento do cliente: ");
 
-        novoCliente = new PessoaFisicaPojo(cpf, nome, dataNascimento, numeroConta, agencia, telefone, saldo, limiteCheque);
+        PessoaFisicaPojo novoCliente = new PessoaFisicaPojo(cpf, nome, dataNascimento, numeroConta, agencia, telefone, saldo, limiteCheque);
 
+        PessoaFisicaDAO.inserePF(novoCliente);
     } else {
         String cnpj = Scanner.lerValorAlfanumerico("Insira o CNPJ do cliente: ");
         String razaoSocial = Scanner.lerValorAlfanumerico("Insira a razão social: ");
         String nomeFantasia = Scanner.lerValorAlfanumerico("Insira o nome fantasia: ");
 
-        novoCliente = new PessoaJuridicaPojo(cnpj, razaoSocial, nomeFantasia, numeroConta, agencia, telefone, saldo, limiteCheque);
-    }
+        PessoaJuridicaPojo novoCliente = new PessoaJuridicaPojo(cnpj, razaoSocial, nomeFantasia, numeroConta, agencia, telefone, saldo, limiteCheque);
 
-    return novoCliente;
+        PessoaJuridicaDAO.inserePJ(novoCliente);
+    }
 }
 
   public void exibirAtributosPessoaFisica(
