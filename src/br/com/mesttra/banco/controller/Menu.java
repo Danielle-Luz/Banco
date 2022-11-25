@@ -209,10 +209,10 @@ public class Menu {
     }
   }
 
-  public ClientePojo pesquisaCliente(boolean fazerLoop) {
+  public ClientePojo pesquisaCliente(boolean fazerLoop, String mensagem) {
     do {
       String numeroConta = Scanner.lerValorAlfanumerico(
-        "Insira o número da conta do cliente procurado: "
+        mensagem
       );
 
       PessoaJuridicaPojo pessoaJuridicaEncontrada = PessoaJuridicaDAO.consultarCliente(
@@ -236,7 +236,7 @@ public class Menu {
         int opcao = Scanner.lerValorInteiroComLimites(
           1,
           2,
-          "Cadastrar novo cliente?\n1 - Sim\n2 - Não"
+          "Cadastrar novo cliente?\n1 - Sim\n2 - Não\n"
         );
 
         if (opcao == 1) {
@@ -249,7 +249,7 @@ public class Menu {
   public void adicionarSaldo() {
     limparTela();
 
-    ClientePojo clienteEncontrado = pesquisaCliente(false);
+    ClientePojo clienteEncontrado = pesquisaCliente(false,"Insira o número da conta do cliente: ");
 
     if (clienteEncontrado == null) {
       System.out.println("O cliente procurado não foi encontrado");
@@ -292,8 +292,8 @@ public class Menu {
   public void obtemDadosParaAtransferencia() {
     limparTela();
 
-    ClientePojo contaTransferidora = pesquisaCliente(true);
-    ClientePojo contaReceptora = pesquisaCliente(true);
+    ClientePojo contaTransferidora = pesquisaCliente(true, "Insira o número da conta do cliente que fará a transferência: ");
+    ClientePojo contaReceptora = pesquisaCliente(true, "Insira o número da conta do cliente que receberá o montante: ");
 
     float valorTransferido =  Scanner.lerValorMonetario(
       "Valor a ser transferido: "
