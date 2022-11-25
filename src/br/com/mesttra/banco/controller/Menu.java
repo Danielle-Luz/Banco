@@ -7,6 +7,7 @@ import br.com.mesttra.banco.pojo.ClientePojo;
 import br.com.mesttra.banco.pojo.PessoaFisicaPojo;
 import br.com.mesttra.banco.pojo.PessoaJuridicaPojo;
 import br.com.mesttra.banco.scanner.Scanner;
+import br.com.mesttra.banco.validacao.ValidadorCpf;
 
 public class Menu {
 
@@ -39,7 +40,7 @@ public class Menu {
     );
 
     if (tipoCliente == 1) {
-      String cpf = Scanner.lerValorAlfanumerico("Insira o CPF: ");
+      String cpf = ValidadorCpf.validaCpf();
       String nome = Scanner.lerValorAlfanumerico("Insira o nome do cliente: ");
       String dataNascimento = Scanner.lerValorAlfanumerico(
         "Insira a data de nascimento do cliente: "
