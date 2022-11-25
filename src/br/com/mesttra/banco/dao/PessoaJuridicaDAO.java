@@ -2,6 +2,7 @@ package br.com.mesttra.banco.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,6 +11,35 @@ import br.com.mesttra.banco.connectionfactory.ConnectionFactory;
 import br.com.mesttra.banco.pojo.PessoaJuridicaPojo;
 
 public class PessoaJuridicaDAO {
+	
+	private Connection conexao;
+
+	public PessoaJuridicaDAO() {
+		this.conexao = ConnectionFactory.getConnection();
+	}
+	
+	public boolean inserePJ (PessoaJuridicaPojo pj) {
+		String sql = "INSERT INTO pessoa_juridica (cnpj, razao_social, nome_fantasia, numeroConta, agencia, telefone, saldo, limiteCheque) "
+				   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+		try {
+			PreparedStatement stt = this.conexao.prepareStatement(sql);
+			stt.setString(1, pj.getCnpj());
+			stt.setString(2, pj.getRazaoSocial());
+			stt.setString(3, pj.getNomeFantasia());
+			stt.setString(4, pj.getNumeroConta());
+			stt.setInt   (5, pj.getAgencia());
+			stt.setString(6, pj.getTelefone());
+			stt.setDouble(7, pj.getSaldo());
+			stt.setDouble(8, pj.getLimiteCheque());
+			stt.execute();
+			stt.close();
+			System.out.println("\n[Cliente PJ Cadastrado]\n");
+			return true;
+		} catch (SQLException e) {
+			System.err.println("\n[Erro ao Cadastrar Pessoa Jurídica]\n");
+			return false;
+		}
+	}
   static Connection connection = ConnectionFactory.getConnection();
 
   static private ArrayList<PessoaJuridicaPojo> retornaClientes (ResultSet cliente) throws SQLException {

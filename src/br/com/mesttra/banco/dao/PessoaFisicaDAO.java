@@ -2,6 +2,42 @@ package br.com.mesttra.banco.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import br.com.mesttra.banco.connectionfactory.ConnectionFactory;
+//import br.com.mesttra.banco.pojo.ClientePojo;
+import br.com.mesttra.banco.pojo.PessoaFisicaPojo;
+
+public class PessoaFisicaDAO {
+	
+	private Connection conexao;
+
+	public PessoaFisicaDAO() {
+		this.conexao = ConnectionFactory.getConnection();
+	}
+	
+	public boolean inserePF (PessoaFisicaPojo pf) {
+		String cadastro = "INSERT INTO pessoa_fisica (cpf, nome, data_nascimento, numeroConta, agencia, telefone, saldo, limiteCheque) "
+				   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+		try {
+			PreparedStatement stt = this.conexao.prepareStatement(cadastro);
+			stt.setString(1, pf.getCpf());
+			stt.setString(2, pf.getNome());
+			stt.setString(3, pf.getDataNascimento());
+			stt.setString(4, pf.getNumeroConta());
+			stt.setInt   (5, pf.getAgencia());
+			stt.setString(6, pf.getTelefone());
+			stt.setDouble(7, pf.getSaldo());
+			stt.setDouble(8, pf.getLimiteCheque());
+			stt.execute();
+			stt.close();
+			System.out.println("\n[Cliente PF Cadastrado]\n");
+			return true;
+		} catch (SQLException e) {
+			System.err.println("\n[Erro ao Cadastrar Pessoa Física]\n");
+			return false;
+		}
+	}
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
