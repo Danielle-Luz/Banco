@@ -362,7 +362,7 @@ public class Menu {
 
   public void excluirCliente () {
     limparTela();
-    
+
     ClientePojo clienteEncontrado = pesquisaCliente(false, "Insira o número da conta do cliente a ser excluído: ");
 
     if (clienteEncontrado != null) {
@@ -388,6 +388,8 @@ public class Menu {
 
           break;
         case 2:
+          excluirCliente();
+
           break;
         case 3:
           alterarValorDoChequeEspecial();

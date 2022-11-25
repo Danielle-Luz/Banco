@@ -51,8 +51,6 @@ public class ClienteDAO {
 
     try (PreparedStatement sql = conexao.prepareStatement(comando)) {
       sql.execute();
-
-      System.out.println("Cliente excluído com sucesso");
     } catch (SQLException e) {
       e.printStackTrace();
     }
