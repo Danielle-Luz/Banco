@@ -8,12 +8,15 @@
 - Danielle da Luz
 - Milena Sousa
 - Matheus Anchieta
-- Karla Andressa
+- Debora
 
 
 ## Atividades
 
 Aqui estão listadas as atividades e qual membro do grupo é responsável para efetuá-la:
+
+-Gravação do vídeo. --> Debora.
+
 
 -Pessoa pra criar estruturar o projeto. --> Danielle
 
